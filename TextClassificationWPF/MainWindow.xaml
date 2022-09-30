@@ -21,5 +21,19 @@
 
         <Button x:Name="StartLearning" Content="Start" Margin="20" Click="StartLearning_Click" Grid.Column="0" Grid.Row="0"/>
         <TextBox x:Name="TrainingTime" Margin="20" Height="30" Grid.Row="1" Grid.Column="0"></TextBox>
+        <ListBox Name="ListOfItems" Grid.Row="2" Grid.Column="0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Title}" />
+                       
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

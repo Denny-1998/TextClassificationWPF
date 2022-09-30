@@ -30,7 +30,7 @@ namespace TextClassificationWPF
         private void StartLearning_Click(object sender, RoutedEventArgs e)
         {
             //start time
-            DateTimeOffset now = DateTimeOffset.UtcNow; //TODO wrong format??
+            DateTimeOffset now = DateTimeOffset.UtcNow; 
 
             KnowledgeBuilder nb = new KnowledgeBuilder();
 
@@ -45,12 +45,35 @@ namespace TextClassificationWPF
             BagOfWords bof = k.GetBagOfWords();
 
             //end time
-            long unixTimeMilliseconds = now.ToUnixTimeMilliseconds(); //TODO might be wrong format 
+            DateTimeOffset end = DateTimeOffset.UtcNow;
+
+            long unixTimeMilliseconds = end.ToUnixTimeMilliseconds()-now.ToUnixTimeMilliseconds(); 
+           
             TrainingTime.Text = unixTimeMilliseconds + " ms"; 
 
 
 
             List<string> entries = bof.GetEntriesInDictionary();
+
+            //List object
+            List<ListItems> items = new List<ListItems>();
+            
+            //looping through all entries and adding them to the list obj
+            for (int i = 0; i < entries.Count; i++) 
+            {
+                items.Add(new ListItems() { Title = entries[i] });
+            }
+
+            //Adding the list to the xaml
+            ListOfItems.ItemsSource = items;
+            
+            
+
+        }
+        public class ListItems
+        {
+            public string Title { get; set; }
+            
         }
     }
 }
